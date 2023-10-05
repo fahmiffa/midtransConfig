@@ -16,6 +16,7 @@ class Trans extends Midtrans
         $this->order = $order;
     }
  
+    // snap paymanet
     public function getSnapToken()
     {
 
@@ -46,6 +47,7 @@ class Trans extends Midtrans
         return $snapToken;
     }
 
+    // redirect payment url midtrans
     public function createTransaction()
     {
 
@@ -75,6 +77,7 @@ class Trans extends Midtrans
         return $paymentUrl;
     }
 
+    // status transaction midtrans
     public function statusTransaction()
     {
         return Transaction::status($this->order->order_id);
