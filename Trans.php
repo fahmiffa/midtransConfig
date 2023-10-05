@@ -40,36 +40,39 @@ class Trans extends Midtrans
             ]
         ];
  
-        $snapToken = Snap::getSnapToken($params);
+    
+        $snapToken = Snap::getSnapToken($params);        
  
         return $snapToken;
     }
 
     public function createTransaction()
     {
-        $params = [
-            'transaction_details' => [
-                'order_id' => $this->order->inv,
-                'name' => $this->order->services->name,
-                'gross_amount' => $this->order->netto,
-            ],
-            'item_details' => [
-                [
-                    'id' => $this->order->inv,
-                    'price' => $this->order->netto,
-                    'quantity' => 1,
-                    'name' => $this->order->services->name,
-                ]
-            ],
-            'customer_details' => [
-                'first_name' => $this->order->users->name,
-                'email' => $this->order->users->email,
-                'phone' => $this->order->users->hp,
-            ]
-        ];
 
-            $paymentUrl =  Snap::createTransaction($params)->redirect_url;            
-            return $paymentUrl;
+        // info detail
+        // $params = [
+        //     'transaction_details' => [
+        //         'order_id' => $this->order->inv,
+        //         'name' => $this->order->services->name,
+        //         'gross_amount' => $this->order->netto,
+        //     ],
+        //     'item_details' => [
+        //         [
+        //             'id' => $this->order->inv,
+        //             'price' => $this->order->netto,
+        //             'quantity' => 1,
+        //             'name' => $this->order->services->name,
+        //         ]
+        //     ],
+        //     'customer_details' => [
+        //         'first_name' => $this->order->users->name,
+        //         'email' => $this->order->users->email,
+        //         'phone' => $this->order->users->hp,
+        //     ]
+        // ];
+            
+        $paymentUrl =  Snap::createTransaction($this->order)->redirect_url;            
+        return $paymentUrl;
     }
 
     public function statusTransaction()

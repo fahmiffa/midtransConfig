@@ -60,7 +60,8 @@ class CallbackService extends Midtrans
         $orderId = $this->order->inv;
         $statusCode = $this->notification->status_code;  
         
-        $grossAmount = ($this->order->netto != null) ?  $this->order->netto.'.00' : $this->order->price.'.00';        
+        // $grossAmount = ($this->order->netto != null) ?  $this->order->netto.'.00' : $this->order->price.'.00';        
+        $grossAmount = $this->notification->gross_amount; 
 
         $serverKey = $this->serverKey;
         $input = $orderId . $statusCode . $grossAmount . $serverKey;
